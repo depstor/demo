@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import SwapiService from '../services/swapiService';
+import {get} from 'lodash';
 
 export default class Main extends Component {
     SwapiService = new SwapiService();
@@ -25,30 +26,38 @@ export default class Main extends Component {
             people,
             error: false
         })
-        
-        console.log(this.state.people.results)
+        // console.log (get(this.state, 'people.results',))
+        console.log (this.state.people.results)
     }   
+    
 
     onError = (err) => {
         this.setState({
             error: true
         })
     }
-
+    
     renderItems(arr) {
         return arr.map(item => {
             const {name} = item;
             return(
-                <ul>{item}</ul>
+                <ul>{name}</ul>
             )
         });
     }
 
+
+
     render() {
-        return(
-            <div></div>
+        return (
+            <div>
+             {/* <h6>{get(this.state, 'people.results', []).map(i => get(i, 'name', ''))}</h6>  */}
+            {this.state.people.results.name[0]}
+            </div>
         )
+            
     }
+        
 }
 
 
@@ -81,3 +90,6 @@ export default class Main extends Component {
 // }
 
 // export default Main
+
+
+
